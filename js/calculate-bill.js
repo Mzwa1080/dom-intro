@@ -10,15 +10,16 @@ var billStringElement = document.querySelector(".billString");
 //  * check if it is a call or an sms and add the right amount to the overall total
 //  * once dfone looping over all the entries - display the total onto the screen in the billTotal element
 //link the function to a click event on the calculate button
+
 function calculateBtnClicked(){
 
-  //Now we must get the string entered in the textarea
+  // get the string entered in the textArea
   var billString = billStringElement.value;
   //split the string
   var billItems = billString.split(",");
-  // Since I don't know a variable for the "total phone bill" it'll be zero.
+  // a variable for the total phone bill.
   var billTotal = 0;
-  //BillItem Looping ---
+  //loop over all the bill items
   for (var i=0;i<billItems.length;i++){
 
       var billItem = billItems[i].trim();
@@ -27,22 +28,37 @@ function calculateBtnClicked(){
           billTotal += 2.75;
       }
 
-      else if (billItem === "sms"){
+      if (billItem === "sms"){
           billTotal += 0.75;
       }
+
+
   }
 
   //round to two decimals
   var roundedBillTotal = billTotal.toFixed(2);
   billTotalElement.innerHTML = roundedBillTotal;
-// change color when amount reaches about R15-R25
-  if (roundedBillTotal >=30){
-    billTotalElement.classList.add("danger")
+// change color when amount hits 20-30 cost
+  if ( roundedBillTotal >= 20){
+    billTotalElement.classList.add("warning");
   }
-// change color when amount reaches R15-R30
-     else if(roundedBillTotal >= 20){
-    billTotalElement.classList.add("warning")
+
+  if ( roundedBillTotal < 20){
+    billTotalElement.classList.remove("warning");
   }
+// change color when amount hits 20-30 cost
+      if(roundedBillTotal > 30  ){
+    billTotalElement.classList.add("danger");
+  }
+
+  if(roundedBillTotal < 30  ){
+  billTotalElement.classList.remove("danger");
+ //return billTotalElement.classList.add("warning");
+}
+
+
+
+
 }
 // add event listener
 calculateBtnElement.addEventListener('click', calculateBtnClicked);

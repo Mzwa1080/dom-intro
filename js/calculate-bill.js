@@ -36,12 +36,12 @@ function calculateBtnClicked(){
   var roundedBillTotal = billTotal.toFixed(2);
   billTotalElement.innerHTML = roundedBillTotal;
 // change color when amount reaches about R15-R25
-  if ( roundedBillTotal >= 15 && roundedBillTotal <=25.99 ){
-    billTotalElement.classList.add("warning")
+  if (roundedBillTotal >=30){
+    billTotalElement.classList.add("danger")
   }
 // change color when amount reaches R15-R30
-     else if(roundedBillTotal > 30  ){
-    billTotalElement.classList.add("danger")
+     else if(roundedBillTotal >= 20){
+    billTotalElement.classList.add("warning")
   }
 }
 // add event listener

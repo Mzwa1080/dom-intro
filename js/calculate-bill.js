@@ -27,7 +27,7 @@ function calculateBtnClicked(){
           billTotal += 2.75;
       }
 
-      if (billItem === "sms"){
+      else if (billItem === "sms"){
           billTotal += 0.75;
       }
   }

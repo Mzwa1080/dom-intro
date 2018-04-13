@@ -6,14 +6,14 @@
 //get a reference to the add button
 var textTotalAddBtn = document.querySelector(".addToBillBtn");
 //create a variable that will keep track of the total bill
-// these variables are global and defined outside of the Add button event listener.
+//These variables are global and defined outside of the Add button event listener.
 var callsTotal = 0;
 var smsTotal = 0;
 
 function textBillTotal(){
-    // get the value entered in the billType textfield
+// get the value entered in the billType textfield
     var billTypeText = billTypeTextElement.value.trim();
-    // update the correct total
+// update the correct total
     if (billTypeText === "call"){
         callsTotal += 2.75;
     }
@@ -22,15 +22,15 @@ function textBillTotal(){
         smsTotal += 0.75;
     }
 
-    //update the totals that is displayed on the screen.
+//update the totals that is displayed on the screen.
     callTotalElement.innerHTML = callsTotal.toFixed(2);
-    smsTotalElement.innerHTML = smsTotal.toFixed(2);    
+    smsTotalElement.innerHTML = smsTotal.toFixed(2);
     finalCostElement.innerHTML = totalCost.toFixed(2);
     var totalCost = callsTotal + smsTotal;
 
-    //color the total based on the criteria
+//color the total based on the criteria
    if (totalCost >=50){
-       // adding the danger class will make the text red
+// adding the danger class will make the text red
        finalCostElement.classList.add("danger");
    }
    else if (totalCost >= 30){

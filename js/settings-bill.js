@@ -1,5 +1,5 @@
 var billItemTypeWithSettingsElem = document.querySelector(".billItemTypeWithSettings");
-console.log(billItemTypeWithSettingsElem )
+//console.log(billItemTypeWithSettingsElem )
 var callTotalSetting= document.querySelector(".callTotalSettings");
 var  smsTotalSetting = document.querySelector(".smsTotalSettings");
 var  totalSettings = document.querySelector(".totalSettings");
@@ -20,8 +20,8 @@ var callsTotalThree = 0;
 var smsTotalThree = 0;
 
 //for the field
-var totalCalls =0;
-var totalSms = 0;
+var callCost =0;
+var smsCost = 0;
 var warningLevel = 0;
 var criticalLevel = 0;
 var allTotalCallSettings = 0;
@@ -36,14 +36,15 @@ function billTotal(){
 //}
 // update the correct total
     if (billPrice === "call"){
-        callsTotalThree += totalCalls
+        callsTotalThree += callCost
     }
 
     if (billPrice === "sms"){
-        smsTotalThree += totalSms;
+        smsTotalThree += smsCost;
     }
 
-    console.log(totalSms);
+    totalSettings.classList.remove("danger");
+    //console.log(smsCost);
     //update the totals that is displayed on the screen.
     callTotalSetting.innerHTML = callsTotalThree.toFixed(2);
     smsTotalSetting.innerHTML = smsTotalThree.toFixed(2);
@@ -53,27 +54,16 @@ function billTotal(){
    if (totalCostTwo >  warningLevel && totalCostTwo < criticalLevel){
        totalSettings.classList.add("warning");
    }
-    else if (totalCostTwo >= criticalLevel){
+    else if (totalCostTwo > criticalLevel){
        totalSettings.classList.add("danger");
        totalAddBtnThree.disabled = true;
    }
-   if (totalCostTwo <  warningLevel && totalCostTwo < criticalLevel){
-       totalSettings.classList.remove("warning");
-       totalSettings.classList.add("warning");
-   }
-    else if (totalCostTwo >= criticalLevel){
-       totalSettings.classList.add("danger");
-       totalAddBtnThree.disabled = false;
-   }
+  //
+  // else if ( warningLevel < totalCostTwo  &&   criticalLevel < totalCostTwo){
+  //      totalSettings.classList.remove("warning");
+  //  }
 
-   if (totalCostTwo <  warningLevel && totalCostTwo < criticalLevel){
-       totalSettings.classList.remove("warning");
-       totalSettings.classList.add("warning");
-   }
-    else if (totalCostTwo >= criticalLevel){
-       totalSettings.classList.add("danger");
-       totalAddBtnThree.disabled = true;
-   }
+
 
 }
 //add an event listener for when the add button is pressed
@@ -90,19 +80,23 @@ function updateSettings(){
   var criticalCost = parseFloat(updatedCritic)
   var warning = parseFloat(updatedWarning);
 
-  if(callCostSetting != ''){
-    totalCalls =parseFloat(updatedCall)
+  if(totalAddBtnThree.disabled){
+    totalAddBtnThree.disabled = false;
   }
-  if(smsCostSetting != ''){
-    totalSms = parseFloat(updatedSms)
+
+  if(updatedCall != ''){
+    callCost = parseFloat(updatedCall)
+  }
+  if(updatedSms != ''){
+    smsCost = parseFloat(updatedSms)
   }
   //console.log(smsTotal);
 
-  if(warningLevelSetting != ''){
-    warningLevel =parseFloat(updatedWarning)
+  if(updatedWarning != ''){
+    warningLevel =updatedWarning
   }
-  if(criticalLevelSetting != ''){
-    criticalLevel = parseFloat(updatedCritic)
+  if(updatedCritic != ''){
+    criticalLevel = criticalCost
   }
 
 //  console.log(criticalLevel);

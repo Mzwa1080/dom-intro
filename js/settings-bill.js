@@ -53,10 +53,28 @@ function billTotal(){
    if (totalCostTwo >  warningLevel && totalCostTwo < criticalLevel){
        totalSettings.classList.add("warning");
    }
-    else if (totalCostTwo > criticalLevel){
+    else if (totalCostTwo >= criticalLevel){
        totalSettings.classList.add("danger");
        totalAddBtnThree.disabled = true;
    }
+   if (totalCostTwo <  warningLevel && totalCostTwo < criticalLevel){
+       totalSettings.classList.remove("warning");
+       totalSettings.classList.add("warning");
+   }
+    else if (totalCostTwo >= criticalLevel){
+       totalSettings.classList.add("danger");
+       totalAddBtnThree.disabled = false;
+   }
+
+   if (totalCostTwo <  warningLevel && totalCostTwo < criticalLevel){
+       totalSettings.classList.remove("warning");
+       totalSettings.classList.add("warning");
+   }
+    else if (totalCostTwo >= criticalLevel){
+       totalSettings.classList.add("danger");
+       totalAddBtnThree.disabled = true;
+   }
+
 }
 //add an event listener for when the add button is pressed
 totalAddBtnThree.addEventListener('click', billTotal);

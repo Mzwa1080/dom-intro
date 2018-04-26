@@ -54,7 +54,7 @@ function billTotal(){
    if (totalCostTwo >  warningLevel && totalCostTwo < criticalLevel){
        totalSettings.classList.add("warning");
    }
-    else if (totalCostTwo > criticalLevel){
+    else if (totalCostTwo >= criticalLevel){
        totalSettings.classList.add("danger");
        totalAddBtnThree.disabled = true;
    }

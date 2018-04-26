@@ -57,7 +57,7 @@ function billTotal(){
     else if (totalCostTwo >= criticalLevel){
        totalSettings.classList.add("danger");
        totalAddBtnThree.disabled = true;
-   }
+   };
   //
   // else if ( warningLevel < totalCostTwo  &&   criticalLevel < totalCostTwo){
   //      totalSettings.classList.remove("warning");

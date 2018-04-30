@@ -1,5 +1,5 @@
 //get a reference to the calculate button
-var calculateBtnElement = document.querySelector(".calculateBtn");
+var calculateBtn = document.querySelector(".calculateBtn");
 //get a reference to the billTotal element
 var billTotalElement = document.querySelector(".billTotal");
 //get a reference to the billString
@@ -11,14 +11,12 @@ var billStringElement = document.querySelector(".billString");
 //  * once dfone looping over all the entries - display the total onto the screen in the billTotal element
 //link the function to a click event on the calculate button
 
-function calculateBtnClicked(){
 
-  // get the string entered in the textArea
-  var billString = billStringElement.value;
-  //split the string
-  var billItems = billString.split(",");
+
+function calculateBill(billtypes){
+   var billTotal = 0;
+  var billItems = billtypes.split(",");
   // a variable for the total phone bill.
-  var billTotal = 0;
   //loop over all the bill items
   for (var i=0;i<billItems.length;i++){
 
@@ -32,12 +30,21 @@ function calculateBtnClicked(){
           billTotal += 0.75;
       }
 
+    }
 
-  }
+return billTotal.toFixed(2);
+}
+
+
+
+function calculateBtnClicked(){
+  // get the string entered in the textArea
+  var billString = billStringElement.value;
+    var roundedBillTotal= calculateBill(billString);
 
   //round to two decimals
-  var roundedBillTotal = billTotal.toFixed(2);
-  billTotalElement.innerHTML = roundedBillTotal;
+
+  billTotalElement.innerHTML =roundedBillTotal.toFixed(2);
 // change color when amount hits 20-30 cost
   if ( roundedBillTotal >= 20){
     billTotalElement.classList.add("warning");
@@ -56,9 +63,6 @@ function calculateBtnClicked(){
  //return billTotalElement.classList.add("warning");
 }
 
-
-
-
 }
 // add event listener
-calculateBtnElement.addEventListener('click', calculateBtnClicked);
+calculateBtn.addEventListener('click', calculateBtnClicked);

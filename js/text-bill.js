@@ -1,42 +1,94 @@
-
-// get a reference to the textbox where the bill type is to be entered
- var billTypeTextElem = document.querySelector(".billTypeText");
- var callsTotalElem = document.querySelector(".callTotalOne");
- var  smsTotalElem = document.querySelector(".smsTotalOne");
- var  totalCostElem = document.querySelector(".totalOne");
+var billTypeText = document.querySelector('.billTypeText');
+// get a reference of  callTotalOne
+var callsTotalElem = document.querySelector('.callTotalOne');
+//get a reference of smsTotalOne
+var smsTotalElem = document.querySelector('.smsTotalOne');
+// gt a reference where the to total will be displayed
+var totalCostElem = document.querySelector('.totalOne');
 //get a reference to the add button
-var textTotalAddBtn = document.querySelector(".addToBillBtn");
-//create a variable that will keep track of the total bill
-// these variables are global and defined outside of the Add button event listener.
-var callsTotal = 0;
-var smsTotal = 0;
+var addToBillBtn = document.querySelector('.addToBillBtn');
 
-function textBillTotal(){
-    // get the value entered in the billType textfield
-    var billTypeEntered = billTypeTextElem.value.trim();
-    // update the correct total
-    if (billTypeEntered === "call"){
-        callsTotal += 2.75
+// get a reference to the template script tag
+var templateSource = document.querySelector(".billTemplate").innerHTML;
+// compile the template
+var textBillTemplate = Handlebars.compile(templateSource);
+var BillDataElem = document.querySelector(".textBillTotals");
+
+function TextBillTotal() {
+
+  var smsCost = 0;
+  var callCost = 0;
+
+
+  function calcBill(typeofBill) {
+    if (typeofBill === 'sms') {
+      smsCost += 0.75;
+    } else if (typeofBill === 'call') {
+      // it will add 2.75 only if typeofBill equal to call
+      callCost += 2.75;
+    }
+  }
+
+  var CallTotal = function() {
+    return parseFloat(callCost);
+  }
+
+  var smsTotal = function() {
+
+    return parseFloat(smsCost);
+  }
+
+  var billTotal = function() {
+
+    return parseFloat(callCost + smsCost);
+  }
+
+  function totalCostAlert() {
+
+    if (billTotal() > 30.00 && billTotal() <= 50.00) {
+      return "warning";
+    } else if (billTotal() > 50.00) {
+      return "danger";
     }
 
-    else if (billTypeEntered === "sms"){
-        smsTotal += 0.75;
-    }
 
-    //update the totals that is displayed on the screen.
-    callsTotalElem.innerHTML = callsTotal.toFixed(2);
-    smsTotalElem.innerHTML = smsTotal.toFixed(2);
-    var totalCost = callsTotal + smsTotal;
-    totalCostElem.innerHTML = totalCost.toFixed(2);
-
-    //color the total based on the criteria
-   if (totalCost >= 50){
-       // adding the danger class will make the text red
-       totalCostElem.classList.add("danger");
-   }
-   else if (totalCost >= 30){
-       totalCostElem.classList.add("warning");
-   }
+  }
+  return {
+    calc: calcBill,
+    smsTotal: smsTotal,
+    callTotal: CallTotal,
+    total: billTotal,
+    totalAlert: totalCostAlert
+  }
 }
-//add an event listener for when the add button is pressed
-textTotalAddBtn.addEventListener('click', textBillTotal)
+
+
+var textbill = TextBillTotal();
+
+// DOM function that will be displaying the output
+var textbillClicked = function() {
+  var billTypeEntered = billTypeText.value.trim();
+  textbill.calc(billTypeEntered);
+
+  var textData = textBillTemplate({
+    billTotalClass: 'totalOne ' + textbill.totalAlert(),
+    callTotal: textbill.callTotal(),
+    smsTotal: textbill.smsTotal(),
+    billTotal: textbill.total()
+  });
+  BillDataElem.innerHTML = textData;
+}
+
+addToBillBtn.addEventListener('click', textbillClicked);
+document.addEventListener('DOMContentLoaded', function() {
+
+  var textData = textBillTemplate({
+    callTotalClass: 'callTotalOne',
+    smsTotalClass: 'smsTotalOne',
+    billTotalClass: 'totalOne',
+    callTotal: '0.00',
+    smsTotal: '0.00',
+    billTotal: '0.00'
+  });
+  BillDataElem.innerHTML = textData;
+});

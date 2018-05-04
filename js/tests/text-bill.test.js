@@ -1,29 +1,31 @@
-describe('The text-bill function', function() {
-  it('should display "R5.5" as a total of both CALLS & SMSes if user entered two CALLS and one SMS. ',
-    function() {
-      var textbill = TextBillTotal();
+describe("The TextBill function", function(){
+  it("if you put 3 CALL as string only and it should return value of CALLS only expected to be R8.25", function(){
+      var displayTheValue = TextBill();
+          displayTheValue.calls('call');
+          displayTheValue.calls('call');
+          displayTheValue.calls('call');
+          assert.equal(displayTheValue.callsValue(),8.25);
+        });
 
-      textbill.calc('call');
-      textbill.calc('call');
-      textbill.calc('sms');
-      assert.equal(textbill.callTotal(), 5.5);
-      assert.equal(textbill.smsTotal(), 0.75);
-      assert.equal(textbill.total(), 6.25);
+  it("if you put 4 SMSes as string only and it should return value of SMS only expected to be R3.00", function(){
+        var displayTheValue = TextBill();
+            displayTheValue.smsBill('sms');
+            displayTheValue.smsBill('sms');
+            displayTheValue.smsBill('sms');
+            displayTheValue.smsBill('sms');
+            assert.equal(displayTheValue.smsValue(),3.00);
+        });
 
-    });
-
-
-  it('should display "R2.25" as a total of SMSes if user entered three SMSes.  ',
-    function() {
-      var textbill = TextBillTotal();
-
-      textbill.calc('sms');
-      textbill.calc('sms');
-      textbill.calc('sms');
-      assert.equal("R" + textbill.callTotal(), "R0.00");
-      assert.equal("R" + textbill.smsTotal(), "R2.25");
-      assert.equal("R" + textbill.total(), 'R2.25');
-
-    });
+  it("if you put 3 SMS string and 2 CALLS it should return TOTAL value of SMSes and CALLS, expected to be R7.75", function(){
+        var displayTheValue = TextBill();
+          displayTheValue.smsBill('sms');
+          displayTheValue.smsBill('sms');
+          displayTheValue.smsBill('sms');
+          displayTheValue.calls('calls');
+          displayTheValue.calls('calls');
+          // assert.equal(displayTheValue.callsValue(), 5.50)
+          // assert.equal(displayTheValue.smsValue(), 2.25)
+          assert.equal(displayTheValue.totalValue(callsTotal, smsTotal), 7.75);
+      });
 
 });

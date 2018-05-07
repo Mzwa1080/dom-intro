@@ -7,29 +7,77 @@ var  totalCostTwoElem = document.querySelector(".totalTwo");
 var radioTotalAddBtn = document.querySelector(".radioBillAddBtn");
 //create a variable that will keep track of the total bill
 // these variables are global and defined outside of the Add button event listener.
-var callsTotalTwo = 0;
-var smsTotalTwo = 0;
+
+
+function logicBill(){
+  var callsTotalTwo = 0;
+  var smsTotalTwo = 0;
+  var lastTotal = 0;
+
+  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+
+  // function forValue(checkedRadioBtn){
+  //   if (checkedRadioBtn){
+  //       var billItemType = checkedRadioBtn.value;
+  //       // billItemType will be 'call' or 'sms'
+  //   }
+  // }
+
+  function SMSes(billItemType){
+    if (billItemType === "sms"){
+        smsTotalTwo += 0.75;
+    }
+    return smsTotalTwo;
+  }
+    // update the correct total
+    function callsFunc(billItemType){
+      if (billItemType === "call"){
+          callsTotalTwo += 2.75
+      }
+    }
+
+
+    function smsValues(){
+      return smsTotalTwo.toFixed(2);
+    }
+
+    function callsValues(){
+      return callsTotalTwo.toFixed(2);
+    }
+
+    function allValues(){
+      return lastTotal =(callsTotalTwo + smsTotalTwo).toFixed(2);
+    }
+
+    return{
+    //  forValue,
+      SMSes,
+      callsFunc,
+      smsValues,
+      callsValues,
+      callsValues,
+      allValues
+    }
+
+}
+
+  var instance = logicBill();
+
 
 function radioBillTotal(){
   //To get the bill type to add from the radio button
+
+
   var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-if (checkedRadioBtn){
-    var billItemType = checkedRadioBtn.value;
-    // billItemType will be 'call' or 'sms'
-}
-    // update the correct total
-    if (billItemType === "call"){
-        callsTotalTwo += 2.75
-    }
-
-    else if (billItemType === "sms"){
-        smsTotalTwo += 0.75;
-    }
-
-
+  if (checkedRadioBtn){
+      var billItemType = checkedRadioBtn.value
+      // billItemType will be 'call' or 'sms'
+  }
+    logicBill.callsFunc(billItemType)
+    logicBill.SMSes(billItemType)
     //update the totals that is displayed on the screen.
-    callsTotalTwoElem.innerHTML = callsTotalTwo.toFixed(2);
-    smsTotalTwoElem.innerHTML = smsTotalTwo.toFixed(2);
+    callsTotalTwoElem.innerHTML = logicBill.callsValues();
+    smsTotalTwoElem.innerHTML = logicBill.smsValues();
     var totalCostTwo = callsTotalTwo + smsTotalTwo;
     totalCostTwoElem.innerHTML = totalCostTwo.toFixed(2);
 

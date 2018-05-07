@@ -21,11 +21,11 @@ describe("The TextBill function", function(){
           displayTheValue.smsBill('sms');
           displayTheValue.smsBill('sms');
           displayTheValue.smsBill('sms');
-          displayTheValue.calls('calls');
-          displayTheValue.calls('calls');
+          displayTheValue.calls('call');
+          displayTheValue.calls('call');
           // assert.equal(displayTheValue.callsValue(), 5.50)
           // assert.equal(displayTheValue.smsValue(), 2.25)
-          assert.equal(displayTheValue.totalValue(callsTotal, smsTotal), 7.75);
+          assert.equal(7.75, displayTheValue.totalValue() );
       });
 
 });

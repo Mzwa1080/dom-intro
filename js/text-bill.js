@@ -1,13 +1,7 @@
-// // get a reference to the textbox where the bill type is to be entered
-// var billTypeTextElem = document.querySelector(".billTypeText");
-// var callsTotalElem = document.querySelector(".callTotalOne");
-// var smsTotalElem = document.querySelector(".smsTotalOne");
-// var totalCostElem = document.querySelector(".totalOne");
-// //get a reference to the add button
-// var myAddedBtn = document.querySelector(".addToBillBtn");
-// //create a variable that will keep track of the total bill
-// // these variables are global and defined outside of the Add button event listener.
-//
+
+//create a variable that will keep track of the total bill
+// these variables are global and defined outside of the Add button event listener.
+
 
 
 function TextBill(){
@@ -30,14 +24,14 @@ function TextBill(){
       }
 
   function smsValue(){
-      return smsTotal;
+      return smsTotal.toFixed(2);
     }
 
   function callsValue(){
-      return callsTotal ;
+      return callsTotal.toFixed(2) ;
     }
 
-  function totalValue(smsTotal, callsTotal){
+  function totalValue(){
 
       return totalBill = callsTotal + smsTotal;
       }
@@ -53,3 +47,7 @@ function TextBill(){
       totalValue
     }
   }
+
+ var  textBill =TextBill();
+
+//----------------DOM-----------------

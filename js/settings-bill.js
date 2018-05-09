@@ -19,11 +19,6 @@ var criticalLevelSetting = document.querySelector('.criticalLevelSetting');
 
 
 //for the field
-var callCost =0;
-var smsCost = 0;
-var warningLevel = 0;
-var criticalLevel = 0;
-var allTotalCallSettings = 0;
 
 
 
@@ -31,16 +26,35 @@ function settingLogic(){
   var callsTotalThree = 0;
   var smsTotalThree = 0;
 
+
+  var callCost =0;
+  var smsCost = 0;
+  var warningLevel = 0;
+  var criticalLevel = 0;
+  var allTotalCallSettings = 0;
+
   //var billPrice = checkedBillTotal.value;
 
   function callCostValue(updateCallValue){
     callCost = parseFloat(updateCallValue)
   }
 
+  function smsCostValue(updateSmsValue){
+    smsCost = parseFloat(updateSmsValue)
+  }
+
+  function warningLevel(updatedWarningValue){
+    warningLevel = parseFloat(updatedWarningValue)
+  }
+
+  function criticalLevel(updateCriticalValue){
+    criticalLevel = parseFloat(updateCriticalValue)
+  }
+
   function forCalls(billPrice){
     if (billPrice === "call"){
         callsTotalThree += callCost
-        console.log(callsTotalThree)
+        //console.log(callsTotalThree)
 
     }
   }
@@ -59,11 +73,19 @@ function settingLogic(){
   }
 
   function forSmsValues(){
-    return smsTotalThree;
+    return smsTotalThree.toFixed(2);
   }
 
+  function forWarningValue(){
+    return warningLevel;
+  }
+
+  function forCriticalValue(){
+    return criticalLevel;
+  }
   //------function of total that will add the sms3s and call's function.
   function forTotal(){
+    var finalBill = callsTotalThree + smsTotalThree;
     return finalBill = callsTotalThree + smsTotalThree;
   }
 
@@ -73,6 +95,11 @@ function settingLogic(){
     forCallValues,
     forSmsValues,
     callCostValue,
+    smsCostValue,
+    warningLevel,
+    forWarningValue,
+    criticalLevel,
+    forCriticalValue,
     forTotal
   }
 }
@@ -80,11 +107,11 @@ function settingLogic(){
 var mySettings = settingLogic();
 
 function updateSettings(){
-  console.log(callCostSetting.value)
-
-
-  mySettings.callCostValue(callCostSetting.value)
-
+  //console.log(callCostSetting.value)
+  mySettings.callCostValue(callCostSetting.value);
+  mySettings.smsCostValue(smsCostSetting.value);
+  mySettings.forWarningValue(warningLevelSetting.value)
+  mySettings.forCriticalValue(criticalLevelSetting.value)
 }
 
 
@@ -106,21 +133,23 @@ function billTotal(){
 //     if (billPrice === "sms"){
 //         smsTotalThree += smsCost;
 //     }
-console.log(checkedBillTotal.value)
-mySettings.forCalls(checkedBillTotal.value)
-
+    //console.log(checkedBillTotal.value)
+      mySettings.forCalls(checkedBillTotal.value)
+      mySettings.forSMSes(checkedBillTotal.value);
+      mySettings.forWarningValue(checkedBillTotal.value)
+      mySettings.forCriticalValue(checkedBillTotal.value)
     totalSettings.classList.remove("danger");
     //console.log(smsCost);
     //update the totals that is displayed on the screen.
     callTotalSetting.innerHTML = mySettings.forCallValues();
-    smsTotalSetting.innerHTML = smsTotalThree.toFixed(2);
-    var totalCostTwo = callsTotalThree + smsTotalThree;
+    smsTotalSetting.innerHTML = mySettings.forSmsValues();
+    var totalCostTwo = mySettings.forTotal();
     totalSettings.innerHTML = totalCostTwo.toFixed(2);
 
-   if (totalCostTwo >  warningLevel && totalCostTwo < criticalLevel){
+   if (totalCostTwo >  mySettings.forWarningValue && totalCostTwo < mySettings.forCriticalValue){
        totalSettings.classList.add("warning");
    }
-    else if (totalCostTwo >= criticalLevel){
+    else if (totalCostTwo >= mySettings.forCriticalValue){
        totalSettings.classList.add("danger");
        totalAddBtnThree.disabled = true;
    };
@@ -128,9 +157,6 @@ mySettings.forCalls(checkedBillTotal.value)
   // else if ( warningLevel < totalCostTwo  &&   criticalLevel < totalCostTwo){
   //      totalSettings.classList.remove("warning");
   //  }
-
-
-
 }
 //add an event listener for when the add button is pressed
 totalAddBtnThree.addEventListener('click', billTotal);

@@ -5,6 +5,7 @@ var  totalCostTwoElem = document.querySelector(".totalTwo");
 
 //get a reference to the add button
 var radioTotalAddBtn = document.querySelector(".radioBillAddBtn");
+
 var callsTotalTwo = 0;
 var smsTotalTwo = 0;
 
@@ -14,15 +15,21 @@ function radioBillTotal(){
 
 
   var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-  if (checkedRadioBtn){
-      var billItemType = checkedRadioBtn.value
+  //if (checkedRadioBtn){
+      var billItemType = billItemTypeRadioElem.value
       // billItemType will be 'call' or 'sms'
+  //}
+  if (billItemType === "call"){
+      callsTotalTwo += 2.75;
   }
-    logicBill.callsFunc(billItemType)
-    logicBill.SMSes(billItemType)
+  else if (billItemType === "sms"){
+      smsTotalTwo += 0.75;
+  }
+    // logicBill.callsFunc(billItemType)
+    // logicBill.SMSes(billItemType)
     //update the totals that is displayed on the screen.
-    callsTotalTwoElem.innerHTML = logicBill.callsValues();
-    smsTotalTwoElem.innerHTML = logicBill.smsValues();
+    callsTotalTwoElem.innerHTML =  callsTotalTwo.toFixed(2);
+    smsTotalTwoElem.innerHTML = smsTotalTwo.toFixed(2);
     var totalCostTwo = callsTotalTwo + smsTotalTwo;
     totalCostTwoElem.innerHTML = totalCostTwo.toFixed(2);
 

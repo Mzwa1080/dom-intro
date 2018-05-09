@@ -1,8 +1,3 @@
-
-//create a variable that will keep track of the total bill
-// these variables are global and defined outside of the Add button event listener.
-
-
 function logicBill(){
   var callsTotalTwo = 0;
   var smsTotalTwo = 0;

@@ -44,6 +44,4 @@ function TextBill(){
     }
   }
 
- var  textBill =TextBill();
-
 //----------------DOM-----------------

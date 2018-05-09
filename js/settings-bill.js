@@ -112,6 +112,9 @@ function updateSettings(){
   mySettings.smsCostValue(smsCostSetting.value);
   mySettings.forWarningValue(warningLevelSetting.value)
   mySettings.forCriticalValue(criticalLevelSetting.value)
+
+
+
 }
 
 
@@ -138,7 +141,7 @@ function billTotal(){
       mySettings.forSMSes(checkedBillTotal.value);
       mySettings.forWarningValue(checkedBillTotal.value)
       mySettings.forCriticalValue(checkedBillTotal.value)
-    totalSettings.classList.remove("danger");
+    //totalSettings.classList.remove("danger");
     //console.log(smsCost);
     //update the totals that is displayed on the screen.
     callTotalSetting.innerHTML = mySettings.forCallValues();
@@ -146,17 +149,22 @@ function billTotal(){
     var totalCostTwo = mySettings.forTotal();
     totalSettings.innerHTML = totalCostTwo.toFixed(2);
 
-   if (totalCostTwo >  mySettings.forWarningValue && totalCostTwo < mySettings.forCriticalValue){
+   if (totalCostTwo >  mySettings.forWarningValue() && totalCostTwo < mySettings.forCriticalValue()){
        totalSettings.classList.add("warning");
    }
-    else if (totalCostTwo >= mySettings.forCriticalValue){
-       totalSettings.classList.add("danger");
-       totalAddBtnThree.disabled = true;
-   };
-  //
-  // else if ( warningLevel < totalCostTwo  &&   criticalLevel < totalCostTwo){
-  //      totalSettings.classList.remove("warning");
-  //  }
+
+   // if (totalCostTwo <  mySettings.forWarningValue()){
+   //     totalSettings.classList.remove("warning");
+   // }
+   //
+   //  else if (totalCostTwo >= mySettings.forCriticalValue()){
+   //     totalSettings.classList.add("danger");
+   //     //totalAddBtnThree.disabled = true;
+   // };
+
+    // if(totalAddBtnThree.disabled){
+    //       totalAddBtnThree.disabled = false;
+    //   }
 }
 //add an event listener for when the add button is pressed
 totalAddBtnThree.addEventListener('click', billTotal);

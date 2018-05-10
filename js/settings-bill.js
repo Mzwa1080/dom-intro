@@ -1,7 +1,6 @@
-function settingLogic(){
+function SettingLogic(){
   var callsTotalThree = 0;
   var smsTotalThree = 0;
-
 
   var callCost =0;
   var smsCost = 0;
@@ -10,7 +9,6 @@ function settingLogic(){
   var allTotalCallSettings = 0;
 
   //var billPrice = checkedBillTotal.value;
-
   function callCostValue(updateCallValue){
     callCost = parseFloat(updateCallValue)
   }
@@ -41,8 +39,6 @@ function settingLogic(){
     }
   }
 
-
-//--------return the functions declared from the top----
   function forCallValues(){
 
     return callsTotalThree.toFixed(2);
@@ -79,4 +75,4 @@ function settingLogic(){
     forTotal
   }
 }
-var mySettings = settingLogic();
+var mySettings = SettingLogic();

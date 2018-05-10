@@ -1,16 +1,7 @@
-function logicBill(){
+function LogicBill(){
   var callsTotalTwo = 0;
   var smsTotalTwo = 0;
   var lastTotal = 0;
-
-  //var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-
-  // function forValue(checkedRadioBtn){
-  //   if (checkedRadioBtn){
-  //       var billItemType = checkedRadioBtn.value;
-  //       // billItemType will be 'call' or 'sms'
-  //   }
-  // }
 
   function SMSes(billItemType){
     if (billItemType === "sms"){
@@ -50,10 +41,4 @@ function logicBill(){
 
 }
 
-  var instance = logicBill();
-
-
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the running total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen
+  var instance = LogicBill();

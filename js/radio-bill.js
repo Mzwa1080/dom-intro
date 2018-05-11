@@ -16,7 +16,6 @@ function LogicBill(){
       }
     }
 
-
     function smsValues(){
       return smsTotalTwo.toFixed(2);
     }
@@ -41,4 +40,4 @@ function LogicBill(){
 
 }
 
-  var instance = LogicBill();
+  var radioInstance = LogicBill();

@@ -55,7 +55,7 @@ function SettingLogic(){
   function forCriticalValue(){
     return criticalLevels;
   }
-  //------function of total that will add the sms3s and call's function.
+
   function forTotal(){
     var finalBill = callsTotalThree + smsTotalThree;
     return finalBill = callsTotalThree + smsTotalThree;

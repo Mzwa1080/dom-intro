@@ -43,12 +43,10 @@ function billTotal(){
     totalSettings.innerHTML = totalCostTwo.toFixed(2);
 
    if (totalCostTwo > mySettings.forWarningValue()) {
-        //console.log("found");
           totalSettings.classList.add("warning");
    }
 
    if(totalCostTwo >= mySettings.forCriticalValue()){
-     //console.log('found2')
         totalSettings.classList.add('danger')
           totalAddBtnThree.disabled= true;
    }

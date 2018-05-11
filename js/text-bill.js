@@ -28,7 +28,7 @@ function TextBill(){
     }
 
   function totalValue(){
-
+      var totalBill = callsTotal + smsTotal;
       return totalBill = callsTotal + smsTotal;
       }
       // function returnTotal(){

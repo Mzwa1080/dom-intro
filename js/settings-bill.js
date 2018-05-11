@@ -8,7 +8,6 @@ function SettingLogic(){
   var criticalLevels = 0;
   var allTotalCallSettings = 0;
 
-  //var billPrice = checkedBillTotal.value;
   function callCostValue(updateCallValue){
     callCost = parseFloat(updateCallValue)
   }
@@ -36,6 +35,7 @@ function SettingLogic(){
   function forSMSes(billPrice){
     if (billPrice === "sms"){
         smsTotalThree += smsCost;
+
     }
   }
 

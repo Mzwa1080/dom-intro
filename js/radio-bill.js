@@ -40,4 +40,4 @@ function LogicBill(){
 
 }
 
-  var radioInstance = LogicBill();
+\

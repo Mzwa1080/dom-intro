@@ -18,8 +18,6 @@ function radioBillTotal(){
     radioInstance.SMSes(billItemType);
     radioInstance.callsFunc(billItemType);
 
-    // var billItemType = billItemTypeRadioElem.value
-
     callsTotalTwoElem.innerHTML =  radioInstance.callsValues();
     smsTotalTwoElem.innerHTML = radioInstance.smsValues();
     var totalCostTwo = radioInstance.allValues();

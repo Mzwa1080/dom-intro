@@ -31,9 +31,6 @@ function TextBill(){
       var totalBill = callsTotal + smsTotal;
       return totalBill = callsTotal + smsTotal;
       }
-      // function returnTotal(){
-      //   return totalBill;
-      // }
 
     return {
       calls,

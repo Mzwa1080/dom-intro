@@ -4,41 +4,42 @@ function TextBill(){
 
     var callsTotal = 0;
     var smsTotal = 0;
-    var totalBill = 0;
 
-// do myOwn calculations
-  function calls(billType){
-    if(billType ==="call"){
+    function calculate(billType){
+      if(billType == "call"){
         callsTotal += 2.75;
       }
-    }
-
-    function smsBill(billType){
-     if(billType ==="sms"){
-        smsTotal += 0.75;
-        }
+      else if(billType == "sms"){
+        smsTotal += 0.75
       }
+    }
 
   function smsValue(){
       return smsTotal.toFixed(2);
     }
 
   function callsValue(){
-      return callsTotal.toFixed(2) ;
+      return callsTotal.toFixed(2);
     }
 
   function totalValue(){
       var totalBill = callsTotal + smsTotal;
       return totalBill = callsTotal + smsTotal;
       }
+      
 
     return {
-      calls,
-      smsBill,
+      // calls,
+      // smsBill,
+      calculate,
       smsValue,
       callsValue,
-      totalValue
+      totalValue,
+      // colorChanging
     }
   }
 
 //----------------DOM-----------------
+
+
+

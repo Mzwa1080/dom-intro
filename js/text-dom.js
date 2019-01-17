@@ -1,30 +1,61 @@
 var billTypeTextElem = document.querySelector(".billTypeText");
 var callsTotalElem = document.querySelector(".callTotalOne");
 var smsTotalElem = document.querySelector(".smsTotalOne");
-var totalCostElem = document.querySelector(".totalOne");
+var totalBillOne = document.querySelector(".totalBillOne");
+
 //get a reference to the add button
 var textTotalAddBtn = document.querySelector(".addToBillBtn");
 
+//Reference for the handlabar that will display
+var display = document.querySelector('.displayField');
+// reference to the handlebar that will insert and be compiled 
+var BillTemplate = document.querySelector('.insertDataTemplate').innerHTML;
+//compiling the template
+var compiledTemplate = Handlebars.compile(BillTemplate);
+
 var textbilling = TextBill()
 
-function textBillTotal(){
-    // get the value entered in the billType textfield
-    var billTypeEntered = billTypeTextElem.value.trim();
-    // update the correct total
-    textbilling.calls(billTypeEntered);
-    textbilling.smsBill(billTypeEntered);
-    //update the totals that is displayed on the screen.
-    callsTotalElem.innerHTML = textbilling.callsValue();
-    smsTotalElem.innerHTML = textbilling.smsValue();
-    var totalCost = textbilling.totalValue();
-    totalCostElem.innerHTML = totalCost.toFixed(2);
 
-    if (totalCost >= 50){
-        // adding the danger class will make the text red
-        totalCostElem.classList.add("danger");
-    }
-    else if (totalCost >= 30){
-        totalCostElem.classList.add("warning");
-    }
-}
-textTotalAddBtn.addEventListener('click', textBillTotal);
+
+document.addEventListener('DOMContentLoaded', function () {
+    var insertData = {
+        callTotal: 0.00.toFixed(2),
+        smsTotal: 0.00.toFixed(2),
+        grandTotal: 0.00.toFixed(2)
+    };
+    var compiledData = compiledTemplate(insertData);
+    display.innerHTML = compiledData;
+});
+
+textTotalAddBtn.addEventListener('click', function () {
+
+    textbilling.calculate(billTypeTextElem.value);
+    var insertData = {
+        callTotal: textbilling.callsValue(),
+        smsTotal: textbilling.smsValue(),
+        grandTotal: textbilling.totalValue().toFixed(2)
+    };
+    var compiledData = compiledTemplate(insertData);
+    display.innerHTML = compiledData;
+    totalBillOne,innerHTML = textbilling.totalValue();
+
+    // console.log(display.innerHTML);
+
+
+    var totalCost = textbilling.totalValue();
+
+
+    if(totalCost > 30 & totalCost < 50){totalBillOne.classList.add("warning");}
+    else if (totalCost > 50){totalBillOne.classList.add("danger");}
+
+    
+
+    // if (totalCost >=50) {
+    //     totalBillOne.classList.add('crimson');
+    // } else if (totalCost >= 30) {
+    //     totalBillOne.classList.add('orange');
+    // }
+    totalBillOne = totalCost;
+    console.log(totalBillOne)
+    console.log(totalCost)
+});

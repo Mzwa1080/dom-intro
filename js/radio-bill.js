@@ -1,41 +1,49 @@
-function LogicBill(){
+function LogicBill() {
   var callsTotalTwo = 0;
   var smsTotalTwo = 0;
   var lastTotal = 0;
 
-  function SMSes(billItemType){
-    if (billItemType === "sms"){
-        smsTotalTwo += 0.75;
+  function SMSes(billItemType) {
+    if (billItemType === "sms") {
+      smsTotalTwo += 0.75;
     }
     return smsTotalTwo;
   }
-    // update the correct total
-    function callsFunc(billItemType){
-      if (billItemType === "call"){
-          callsTotalTwo += 2.75
-      }
+  // update the correct total
+  function callsFunc(billItemType) {
+    if (billItemType === "call") {
+      callsTotalTwo += 2.75
     }
+  }
 
-    function smsValues(){
-      return smsTotalTwo.toFixed(2);
+  function calculations(billItemType) {
+    if (billItemType == "call") {
+      callsTotalTwo += 2.75;
+    } else if (billItemType == "sms") {
+      smsTotalTwo += 0.75;
     }
+  }
 
-    function callsValues(){
-      return callsTotalTwo.toFixed(2);
-    }
+  function smsValues() {
+    return smsTotalTwo.toFixed(2);
+  }
 
-    function allValues(){
-      return lastTotal =(callsTotalTwo + smsTotalTwo).toFixed(2);
-    }
+  function callsValues() {
+    return callsTotalTwo.toFixed(2);
+  }
 
-    return{
-    //  forValue,
-      SMSes,
-      callsFunc,
-      smsValues,
-      callsValues,
-      callsValues,
-      allValues
-    }
+  function allValues() {
+    return lastTotal = (callsTotalTwo + smsTotalTwo).toFixed(2);
+  }
+
+  return {
+    calculations,
+    SMSes,
+    callsFunc,
+    smsValues,
+    callsValues,
+    callsValues,
+    allValues
+  }
 
 }
